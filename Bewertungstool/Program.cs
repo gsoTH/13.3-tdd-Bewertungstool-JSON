@@ -1,4 +1,6 @@
-﻿namespace Bewertungstool
+﻿using System.Text;
+
+namespace Bewertungstool
 {
     class Program
     {
@@ -10,6 +12,8 @@
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmMain(noten));
+
+            ErzeugeJSON(noten);
         }
 
         private static List<Note> BeispielObjekteErzeugen()
@@ -29,9 +33,38 @@
 
         public static void ErzeugeJSON(List<Note> noten)
         {
-            // TODO: Datei erzeugen
-            // TODO: Anzahl der Objekte in Datei eintragen
-            // TODO: Alle Objekte in Datei auflisten
+            using (StreamWriter sw = new StreamWriter("noten.json", false, Encoding.UTF8))
+            {
+                // Objekt eröffnen
+                sw.WriteLine("{");
+
+                // Anzahl der Objekte in Datei eintragen
+                    // \" verhindert, dass der String beendet wird. (Escape)
+                sw.WriteLine($"\"anzahl\": {noten.Count},"); 
+                    
+                // Alle Objekte in Datei aufliste
+                sw.WriteLine("\"noten\": [");
+                for (int i = 0; i < noten.Count; i++)
+                {
+                    Note note = noten[i];
+                    sw.WriteLine("{");
+                    sw.WriteLine($"\"erzeugtAm\": \"{note.ErzeugtAm}\",");
+                    sw.WriteLine($"\"möglichePunkte\": {note.MoeglichePunkte},");
+                    sw.WriteLine($"\"erreichtePunkte\": {note.ErreichtePunkte}");
+                    sw.Write("}");
+
+                    // Komma nur setzen, wenn nicht letztes Objekt
+                    if (i < noten.Count - 1)
+                    {
+                        sw.Write(",");
+                    }
+                    sw.WriteLine();
+                }
+                // Ende Array und Objekt
+                sw.WriteLine("]");
+                sw.WriteLine("}");
+            }
+
         }
     }
 }
