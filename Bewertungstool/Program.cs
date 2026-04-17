@@ -1,9 +1,11 @@
 ﻿using System.Text;
+using System.Text.Json;
 
 namespace Bewertungstool
 {
     class Program
     {
+        private const string dateiname = "noten.json";
         public static void Main(string[] args)
         {
             List<Note> noten = BeispielObjekteErzeugen();
@@ -33,7 +35,7 @@ namespace Bewertungstool
 
         public static void ErzeugeJSON(List<Note> noten)
         {
-            using (StreamWriter sw = new StreamWriter("noten.json", false, Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(dateiname, false, Encoding.UTF8))
             {
                 // Objekt eröffnen
                 sw.WriteLine("{");
