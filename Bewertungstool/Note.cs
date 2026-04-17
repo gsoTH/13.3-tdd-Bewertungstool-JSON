@@ -4,19 +4,19 @@ namespace Bewertungstool
     {
         private int moeglichePunkte;
         private int erreichtePunkte;
-        private string name;
+        private DateOnly erzeugtAm;
         
         public Note(int moeglichePunkte, int erreichtePunkte)
         {
             this.moeglichePunkte = moeglichePunkte;
             this.erreichtePunkte = erreichtePunkte;
-            this.name = "Anonym";
+            erzeugtAm = DateOnly.FromDateTime(DateTime.Now);
         }
 
         public int MoeglichePunkte { get { return moeglichePunkte; } }
         public int ErreichtePunkte { get { return erreichtePunkte; }  }
         
-        public string Name { get { return name; } set { name = value; } }
+        public DateOnly ErzeugtAm { get { return erzeugtAm; }}
         public double Prozent
         {
             get { return Math.Round((double)erreichtePunkte/(double)moeglichePunkte, 2); }
