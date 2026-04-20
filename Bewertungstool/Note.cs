@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Bewertungstool
 {
     public class Note
@@ -13,10 +15,19 @@ namespace Bewertungstool
             erzeugtAm = DateOnly.FromDateTime(DateTime.Now);
         }
 
-        public int MoeglichePunkte { get { return moeglichePunkte; } }
-        public int ErreichtePunkte { get { return erreichtePunkte; }  }
+        public int MoeglichePunkte { 
+            get { return moeglichePunkte; } 
+            set { moeglichePunkte = value; }
+        }
+        public int ErreichtePunkte { 
+            get { return erreichtePunkte; }  
+            set { erreichtePunkte = value; }
+        }
         
-        public DateOnly ErzeugtAm { get { return erzeugtAm; }}
+        public DateOnly ErzeugtAm { 
+            get { return erzeugtAm; }
+            set { erzeugtAm = value; }
+        }
         public double Prozent
         {
             get { return Math.Round((double)erreichtePunkte/(double)moeglichePunkte, 2); }

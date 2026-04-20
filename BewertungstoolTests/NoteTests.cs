@@ -49,5 +49,25 @@ namespace BewertungstoolTests
             // Assert
             Assert.AreEqual(DateOnly.FromDateTime(DateTime.Now), n.ErzeugtAm);
         }
+
+        [TestMethod]
+        public void Eigenschaften_KoennenVeraendertWerden()
+        {
+            // Arrange
+            Note n = new Note(100, 100);
+
+
+            // Act
+            n.ErreichtePunkte = 50;
+            n.MoeglichePunkte = 80;
+            n.ErzeugtAm = new DateOnly(2026,4,17);
+
+            // Assert
+            Assert.AreEqual(50, n.ErreichtePunkte);
+            Assert.AreEqual(80, n.MoeglichePunkte);
+            Assert.AreNotEqual(DateOnly.FromDateTime(DateTime.Now), n.ErzeugtAm);
+        }
+
+
     }
 }
