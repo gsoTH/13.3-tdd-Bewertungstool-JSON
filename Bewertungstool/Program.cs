@@ -1,11 +1,13 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using System.Text.Json;
+
 
 namespace Bewertungstool
 {
     class Program
     {
-        private const string dateiname = "noten.json";
+        private const string nameJsonDatei = "noten.json";
         public static void Main(string[] args)
         {
             List<Note> noten = BeispielObjekteErzeugen();
@@ -23,19 +25,18 @@ namespace Bewertungstool
             // TODO: Noten aus Datei einlesen, statt hier zu erzeugen
 
             List<Note> beispielNoten = new List<Note>();
+
             beispielNoten.Add(new Note(100, 80));
             beispielNoten.Add(new Note(100, 42));
             beispielNoten.Add(new Note(100, 67));
             beispielNoten.Add(new Note(100, 93));
 
             return beispielNoten;
-
-
         }
 
         public static void ErzeugeJSON(List<Note> noten)
         {
-            using (StreamWriter sw = new StreamWriter(dateiname, false, Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(nameJsonDatei, false, Encoding.UTF8))
             {
                 // Objekt eröffnen
                 sw.WriteLine("{");
@@ -50,9 +51,9 @@ namespace Bewertungstool
                 {
                     Note note = noten[i];
                     sw.WriteLine("{");
-                    sw.WriteLine($"\"erzeugtAm\": \"{note.ErzeugtAm}\",");
-                    sw.WriteLine($"\"möglichePunkte\": {note.MoeglichePunkte},");
-                    sw.WriteLine($"\"erreichtePunkte\": {note.ErreichtePunkte}");
+                    sw.WriteLine($"\"ErzeugtAm\": \"{note.ErzeugtAm:yyyy-MM-dd}\",");
+                    sw.WriteLine($"\"MoeglichePunkte\": {note.MoeglichePunkte},");
+                    sw.WriteLine($"\"ErreichtePunkte\": {note.ErreichtePunkte}");
                     sw.Write("}");
 
                     // Komma nur setzen, wenn nicht letztes Objekt
