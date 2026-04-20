@@ -15,18 +15,20 @@ namespace Bewertungstool
             erzeugtAm = DateOnly.FromDateTime(DateTime.Now);
         }
 
+        public Note (int moeglichePunkte, int erreichtePunkte, DateOnly erzeugtAm):this(moeglichePunkte, moeglichePunkte)
+        {
+            this.erzeugtAm = erzeugtAm;
+        }
+
         public int MoeglichePunkte { 
             get { return moeglichePunkte; } 
-            set { moeglichePunkte = value; }
         }
         public int ErreichtePunkte { 
             get { return erreichtePunkte; }  
-            set { erreichtePunkte = value; }
         }
         
         public DateOnly ErzeugtAm { 
             get { return erzeugtAm; }
-            set { erzeugtAm = value; }
         }
         public double Prozent
         {
